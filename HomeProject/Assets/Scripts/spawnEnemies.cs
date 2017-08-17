@@ -7,6 +7,8 @@ public class spawnEnemies : MonoBehaviour
     public List<GameObject> Enemies = new List<GameObject>();
     public List<Transform> Spawns = new List<Transform>();
 
+    public GameObject enemyParent;
+
     int timer;
 
     private void Start()
@@ -23,9 +25,11 @@ public class spawnEnemies : MonoBehaviour
         Spawns.Add(GameObject.Find("enemySpawns").transform.GetChild(4).transform);
         Spawns.Add(GameObject.Find("enemySpawns").transform.GetChild(5).transform);
         //Debug.Log(Spawns.Count);
+
+        
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         SpawnThem();
 
@@ -40,8 +44,10 @@ public class spawnEnemies : MonoBehaviour
         theSpawn = Spawns[Random.Range(0, Spawns.Count)];
         if (timer < 5)
         {
-            Instantiate(chooseEnemy, theSpawn.position, Quaternion.identity);
+            GameObject Go = Instantiate(chooseEnemy, theSpawn.position, Quaternion.identity);
             //Debug.Log(timer);
+            enemyParent = GameObject.Find("EnemyParent");
+            Go.transform.parent = enemyParent.transform;
         }
     }
 }

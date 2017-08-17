@@ -7,12 +7,12 @@ public class spaceShipScript : MonoBehaviour
     float speed = 15f;
     public bool isShooting = false;
     public float shipHealth;
+    public bool gameOverActive = false;
 
     Vector3 transition;
 
     public GameObject _bullet;
     public GameObject _gun;
-    public GameObject _gameOverPanel;
 
     public float ShipHealth
     {
@@ -23,12 +23,10 @@ public class spaceShipScript : MonoBehaviour
     void Start()
     {
         shipHealth = 100;
-
-        _gameOverPanel.SetActive(false);
     }
 
 
-    void Update()
+    void FixedUpdate()
     {
         Movement();
         Shoot();
@@ -42,9 +40,15 @@ public class spaceShipScript : MonoBehaviour
             isShooting = false;
         }
 
-        if(shipHealth <= 0)
+        if (shipHealth <= 0)
         {
-            _gameOverPanel.SetActive(true);
+            Time.timeScale = 0;
+            GameObject.Find("SceneManager").GetComponent<HUDScript>()._gameOverPanel.SetActive(true);
+            gameOverActive = true;
+        }
+        else
+        {
+            gameOverActive = false;
         }
     }
 
@@ -61,7 +65,8 @@ public class spaceShipScript : MonoBehaviour
         if (isShooting)
         {
             //Debug.Log("shoooooot");
-            Instantiate(_bullet, _gun.transform.position, Quaternion.identity);
+            GameObject GO = Instantiate(_bullet, _gun.transform.position, Quaternion.identity);
+            GO.transform.parent = GameObject.Find("EnemyParent").transform;
         }
     }
 }

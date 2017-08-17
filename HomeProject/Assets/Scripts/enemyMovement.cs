@@ -10,14 +10,14 @@ public class enemyMovement : MonoBehaviour
     float blueEnemySpeed = 30f;
 
     public float generalDamageValue;
-    float greenEnemyDamage = 2f;
-    float redEnemyDamage = 3f;
-    float blueEnemyDamage = 1f;
+    float greenEnemyDamage = 10f;
+    float redEnemyDamage = 15f;
+    float blueEnemyDamage = 5f;
 
     public float generalHealthValue;
-    float greenEnemyHealth = 2f;
-    float redEnemyHealth = 3f;
-    float blueEnemyHealth = 1f;
+    float greenEnemyHealth = 80f;
+    float redEnemyHealth = 120f;
+    float blueEnemyHealth = 40f;
 
     //BulletDamage!!:)
     public float generalBulletDamage;
@@ -69,21 +69,21 @@ public class enemyMovement : MonoBehaviour
 
     }
 
-    void Update()
+    void FixedUpdate()
     {
         EnemyMovement();
 
         if(generalHealthValue <= 0)
         {
             hud.counter++;
-            Debug.Log("EnemyDestroyed");
+            //Debug.Log("EnemyDestroyed");
             Destroy(this.gameObject);
         }
 
         if(bulletHit)
         {
             generalHealthValue -= generalBulletDamage;
-            Debug.Log("bullet hit enemy" + "-bulletDamage " + bullet.bulletDamage + "-enemyHealth " + generalHealthValue);
+            //Debug.Log("bullet hit enemy" + "-bulletDamage " + bullet.bulletDamage + "-enemyHealth " + generalHealthValue);
         }
         else
         {
@@ -112,7 +112,7 @@ public class enemyMovement : MonoBehaviour
         if(collision.gameObject.name == ("spaceship"))
         {
             ship.shipHealth -= generalDamageValue;
-            Debug.Log("ship got hit" + "-enemyDamageValue " + generalHealthValue);
+            //Debug.Log("ship got hit" + "-enemyDamageValue " + generalHealthValue);
             Destroy(gameObject);
         }
     }

@@ -41,7 +41,7 @@ public class endOFMap : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == ("Bullet") || other.gameObject.tag == ("Enemy"))
+        if (other.gameObject.tag == ("Bullet") || other.gameObject.tag == ("redEnemy") || other.gameObject.tag == ("greenEnemy") || other.gameObject.tag == ("blueEnemy"))
         {
             Destroy(other.gameObject);
         }
