@@ -23,6 +23,9 @@ public class spaceShipScript : MonoBehaviour
     void Start()
     {
         shipHealth = 100;
+
+        _bullet = Resources.Load<GameObject>("theBullet");
+        _gun = GameObject.Find("spaceship").transform.GetChild(0).gameObject;
     }
 
 
